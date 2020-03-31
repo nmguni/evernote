@@ -10,6 +10,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import Grid from "@material-ui/core/Grid";
+import green from "@material-ui/core/colors/green";
+import CardMedia from "@material-ui/core/CardMedia";
+
+import loginImge from "../images/undraw_sorting_thoughts_6d48.svg";
+const accent = green[900];
+
 const firebase = require("firebase");
 
 class LoginComponent extends React.Component {
@@ -25,60 +32,95 @@ class LoginComponent extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <main className={classes.main}>
-        <CssBaseline />
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Log In!
+      <div className={classes.backgroundLines}>
+        {/* <Grid container spacing={2}>
+          <Grid item xs={12} md={6}> */}
+
+        <main className={classes.main}>
+          <CssBaseline />
+
+          <Typography style={{ color: "#444444" }} variant="h1">
+            {" "}
+            <span style={{ color: "green" }}>N</span>OTES
           </Typography>
-          <form onSubmit={e => this.submitLogin(e)} className={classes.form}>
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="login-email-input">
-                Enter Your Email
-              </InputLabel>
-              <Input
-                autoComplete="email"
-                autoFocus
-                onChange={e => this.userTyping("email", e)}
-                id="login-email-input"
-              ></Input>
-            </FormControl>
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="login-password-input">
-                Enter Your Password
-              </InputLabel>
-              <Input
-                autoComplete="current-password"
-                type="password"
-                onChange={e => this.userTyping("password", e)}
-                id="login-password-input"
-              ></Input>
-            </FormControl>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Log In
-            </Button>
-          </form>
-          {this.state.serverError ? (
-            <Typography
-              className={classes.errorText}
-              component="h5"
-              variant="h6"
-            >
-              Incorrect Login Information
+          <Paper elevation={0} variant="outlined" className={classes.paper}>
+            <Typography component="h1" variant="h5">
+              log in
             </Typography>
-          ) : null}
-          <h5 className={classes.noAccountHeader}>Don't Have An Account?</h5>
-          <Link className={classes.signUpLink} to="/signup">
-            Sign Up!
-          </Link>
-        </Paper>
-      </main>
+            <form onSubmit={e => this.submitLogin(e)} className={classes.form}>
+              <FormControl required fullWidth margin="normal">
+                <InputLabel htmlFor="login-email-input">
+                  Enter Your Email
+                </InputLabel>
+                <Input
+                  autoComplete="email"
+                  autoFocus
+                  onChange={e => this.userTyping("email", e)}
+                  id="login-email-input"
+                ></Input>
+              </FormControl>
+              <FormControl required fullWidth margin="normal">
+                <InputLabel htmlFor="login-password-input" color="primary">
+                  Enter Your Password
+                </InputLabel>
+                <Input
+                  color={accent}
+                  autoComplete="current-password"
+                  type="password"
+                  onChange={e => this.userTyping("password", e)}
+                  id="login-password-input"
+                ></Input>
+              </FormControl>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+              >
+                Log In
+              </Button>
+            </form>
+            {this.state.serverError ? (
+              <Typography
+                className={classes.errorText}
+                component="h5"
+                variant="h6"
+              >
+                Incorrect Login Information
+              </Typography>
+            ) : null}
+            <h5 className={classes.noAccountHeader}>Don't Have An Account?</h5>
+            <Link className={classes.signUpLink} to="/signup">
+              Sign Up!
+            </Link>
+          </Paper>
+        </main>
+
+        {/* </Grid> */}
+
+        {/* <Grid item xs={12} md={6}>
+            <div
+              style={{
+                height: "100%",
+                padding: "1rem"
+              }}
+            >
+              <CardMedia
+                // className={classes.media}
+                image={loginImge}
+                // title="Contemplative Reptile"
+                style={{
+                  height: "100%",
+                  marginTop: "20%",
+                  // marginRight: "10%",
+                  width: "100%",
+                  opacity: ".5"
+                }}
+              />
+            </div>
+          </Grid>
+        </Grid> */}
+      </div>
     );
   }
 
