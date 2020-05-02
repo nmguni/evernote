@@ -1,4 +1,5 @@
-const styles = theme => ({
+// signup styles
+const styles = (theme) => ({
   main: {
     paddingTop: theme.spacing(10),
     width: "auto",
@@ -10,36 +11,45 @@ const styles = theme => ({
     [theme.breakpoints.up(400 + theme.spacing(6))]: {
       width: 400,
       marginLeft: "auto",
-      marginRight: "auto"
-    }
+      marginRight: "auto",
+    },
   },
   paper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     opacity: ".8",
-    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`
+    padding: "1.5rem 2.8rem",
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   submit: {
-    marginTop: theme.spacing(3),
-    backgroundColor: "#00A82D"
+    marginTop: "1rem",
+    backgroundColor: "#00A82D",
+    fontWeight: "bold",
+    letterSpacing: ".2rem",
+    color: "white",
   },
   noAccountHeader: {
-    width: "100%"
+    width: "100%",
   },
   signUpLink: {
     width: "100%",
     textDecoration: "none",
     color: "#00A82D",
-    fontWeight: "bolder"
+    fontWeight: "bolder",
+  },
+  signUpLinkLogIn: {
+    width: "100%",
+    textDecoration: "none",
+    color: "#fff",
+    fontWeight: "bolder",
   },
   errorText: {
     color: "red",
-    textAlign: "center"
+    textAlign: "center",
   },
   backgroundLines: {
     // backgroundImage:
@@ -48,8 +58,8 @@ const styles = theme => ({
 
     backgroundColor: "#fff",
     backgroundImage:
-      'url("https://www.transparenttextures.com/patterns/lined-paper.png")'
-  }
+      'url("https://www.transparenttextures.com/patterns/lined-paper.png")',
+  },
 });
 
 export default styles;

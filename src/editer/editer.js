@@ -4,6 +4,8 @@ import debounce from "../helpers";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class EditorComponent extends React.Component {
   constructor() {
@@ -11,7 +13,7 @@ class EditorComponent extends React.Component {
     this.state = {
       text: "",
       title: "",
-      id: ""
+      id: "",
     };
   }
   // runs when component is mounted & renders the quill compnent
@@ -20,7 +22,7 @@ class EditorComponent extends React.Component {
     this.setState({
       text: this.props.selectedNote.body,
       title: this.props.selectedNote.title,
-      id: this.props.selectedNote.id
+      id: this.props.selectedNote.id,
     });
   };
 
@@ -29,7 +31,7 @@ class EditorComponent extends React.Component {
       this.setState({
         text: this.props.selectedNote.body,
         title: this.props.selectedNote.title,
-        id: this.props.selectedNote.id
+        id: this.props.selectedNote.id,
       });
     }
   };
@@ -38,13 +40,25 @@ class EditorComponent extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.editorContainer}>
-        <BorderColorIcon className={classes.editIcon}></BorderColorIcon>
-        <input
-          className={classes.titleInput}
-          placeholder="Note title..."
-          value={this.state.title ? this.state.title : ""}
-          onChange={e => this.updateTitle(e.target.value)}
-        ></input>
+        <div className={classes.topBar}>
+          <BorderColorIcon className={classes.editIcon}></BorderColorIcon>
+          <input
+            className={classes.titleInput}
+            placeholder="Note title..."
+            value={this.state.title ? this.state.title : ""}
+            onChange={(e) => this.updateTitle(e.target.value)}
+          ></input>
+          <div>
+            {" "}
+            <Button>
+              {" "}
+              <Link className={classes.exitBtn} to="/login">
+                {" "}
+                Exit
+              </Link>{" "}
+            </Button>
+          </div>
+        </div>
         <div className={classes.editorContainer}>
           <ReactQuill
             value={this.state.text}
@@ -55,11 +69,11 @@ class EditorComponent extends React.Component {
     );
   }
 
-  updateBody = async val => {
+  updateBody = async (val) => {
     await this.setState({ text: val });
     this.update();
   };
-  updateTitle = async txt => {
+  updateTitle = async (txt) => {
     await this.setState({ title: txt });
     this.update();
   };
@@ -67,7 +81,7 @@ class EditorComponent extends React.Component {
   update = debounce(() => {
     this.props.noteUpdate(this.state.id, {
       title: this.state.title,
-      body: this.state.text
+      body: this.state.text,
     });
   }, 1500);
 }

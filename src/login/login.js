@@ -10,13 +10,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import Grid from "@material-ui/core/Grid";
-import green from "@material-ui/core/colors/green";
-import CardMedia from "@material-ui/core/CardMedia";
-
-import loginImge from "../images/undraw_sorting_thoughts_6d48.svg";
-const accent = green[900];
-
 const firebase = require("firebase");
 
 class LoginComponent extends React.Component {
@@ -25,7 +18,7 @@ class LoginComponent extends React.Component {
     this.state = {
       email: null,
       password: null,
-      serverError: false
+      serverError: false,
     };
   }
 
@@ -47,7 +40,10 @@ class LoginComponent extends React.Component {
             <Typography component="h1" variant="h5">
               log in
             </Typography>
-            <form onSubmit={e => this.submitLogin(e)} className={classes.form}>
+            <form
+              onSubmit={(e) => this.submitLogin(e)}
+              className={classes.form}
+            >
               <FormControl required fullWidth margin="normal">
                 <InputLabel htmlFor="login-email-input">
                   Enter Your Email
@@ -55,7 +51,7 @@ class LoginComponent extends React.Component {
                 <Input
                   autoComplete="email"
                   autoFocus
-                  onChange={e => this.userTyping("email", e)}
+                  onChange={(e) => this.userTyping("email", e)}
                   id="login-email-input"
                 ></Input>
               </FormControl>
@@ -64,10 +60,10 @@ class LoginComponent extends React.Component {
                   Enter Your Password
                 </InputLabel>
                 <Input
-                  color={accent}
+                  color="secondary"
                   autoComplete="current-password"
                   type="password"
-                  onChange={e => this.userTyping("password", e)}
+                  onChange={(e) => this.userTyping("password", e)}
                   id="login-password-input"
                 ></Input>
               </FormControl>
@@ -77,7 +73,9 @@ class LoginComponent extends React.Component {
                 variant="contained"
                 className={classes.submit}
               >
-                Log In
+                <Link className={classes.signUpLinkLogIn} to="/app">
+                  Log In
+                </Link>
               </Button>
             </form>
             {this.state.serverError ? (
@@ -138,7 +136,7 @@ class LoginComponent extends React.Component {
         break;
     }
   };
-  submitLogin = async e => {
+  submitLogin = async (e) => {
     e.preventDefault();
 
     await firebase
@@ -148,7 +146,7 @@ class LoginComponent extends React.Component {
         () => {
           this.props.history.push("/dashboard");
         },
-        err => {
+        (err) => {
           this.setState({ serverError: true });
           console.log("Error logging in: ", err);
         }

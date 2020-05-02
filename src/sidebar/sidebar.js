@@ -2,15 +2,16 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import List from "@material-ui/core/List";
-import { Divider, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import SidebarItemComponent from "../sidebaritem/sidebaritem";
+import logo from "../images/logo.png";
 
 class SidebarComponent extends React.Component {
   constructor() {
     super();
     this.state = {
       addingNote: false,
-      title: null
+      title: null,
     };
   }
 
@@ -20,6 +21,9 @@ class SidebarComponent extends React.Component {
     if (notes) {
       return (
         <div className={classes.sidebarContainer}>
+          <div className={classes.logo}>
+            <img src={logo} alt="evernote logo" height="50px" />
+          </div>
           <Button onClick={this.newNoteBtnClick} className={classes.newNoteBtn}>
             {this.state.addingNote ? "Cancle" : "New Note"}
           </Button>
@@ -30,17 +34,17 @@ class SidebarComponent extends React.Component {
                 type="text"
                 className={classes.newNoteInput}
                 placeholder="Enter note title"
-                onKeyUp={e => this.updateTitle(e.target.value)}
+                onKeyUp={(e) => this.updateTitle(e.target.value)}
               ></input>
               <Button
                 className={classes.newNoteSubmitBtn}
                 onClick={this.newNote}
               >
-                Submin Note{" "}
+                Add Note{" "}
               </Button>
             </div>
           ) : null}
-          <List>
+          <List className={classes.sideList}>
             {/*  map all notes from props and map to actual elements */}
             {notes.map((_note, _index) => {
               return (
@@ -52,7 +56,7 @@ class SidebarComponent extends React.Component {
                     selectNote={this.selectNote}
                     deleteNote={this.deleteNote}
                   ></SidebarItemComponent>
-                  <Divider></Divider>
+                  {/* <Divider></Divider> */}
                 </div>
               );
             })}
@@ -67,7 +71,7 @@ class SidebarComponent extends React.Component {
     this.setState({ title: null, addingNote: !this.state.addingNote });
   };
 
-  updateTitle = txt => {
+  updateTitle = (txt) => {
     this.setState({ title: txt });
   };
 
@@ -77,7 +81,7 @@ class SidebarComponent extends React.Component {
   };
   // n = note i = index
   selectNote = (n, i) => this.props.selectNote(n, i);
-  deleteNote = note => this.props.deleteNote(note);
+  deleteNote = (note) => this.props.deleteNote(note);
 }
 
 export default withStyles(styles)(SidebarComponent);
