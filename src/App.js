@@ -11,7 +11,7 @@ class App extends React.Component {
     this.state = {
       selectedNoteIndex: null,
       selectedNote: null,
-      notes: null
+      notes: null,
     };
   }
 
@@ -42,61 +42,53 @@ class App extends React.Component {
     firebase
       .firestore()
       .collection("notes") // similar to table in data base
-      .onSnapshot(serverUpdate => {
+      .onSnapshot((serverUpdate) => {
         // gets called when notes collecton gets updated
-        const notes = serverUpdate.docs.map(_doc => {
+        const notes = serverUpdate.docs.map((_doc) => {
           const data = _doc.data();
           data["id"] = _doc.id;
           return data;
         });
-        console.log(notes);
         this.setState({ notes: notes });
       });
   };
   selectNote = (note, index) =>
     this.setState({ selectedNoteIndex: index, selectedNote: note });
   noteUpdate = (id, noteObj) => {
-    firebase
-      .firestore()
-      .collection("notes")
-      .doc(id)
-      .update({
-        title: noteObj.title,
-        body: noteObj.body,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
+    firebase.firestore().collection("notes").doc(id).update({
+      title: noteObj.title,
+      body: noteObj.body,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
   /*  
 when we create a new note go to file base and add and then update 
 */
 
-  newNote = async title => {
+  newNote = async (title) => {
     const note = {
       title: title,
-      body: ""
+      body: "",
     };
-    const newFromDB = await firebase
-      .firestore()
-      .collection("notes")
-      .add({
-        title: note.title,
-        body: note.body,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
+    const newFromDB = await firebase.firestore().collection("notes").add({
+      title: note.title,
+      body: note.body,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     const newID = newFromDB.id;
     await this.setState({ notes: [...this.state.notes, note] });
     const newNoteIndex = this.state.notes.indexOf(
-      this.state.notes.filter(_note => _note.id === newID)[0]
+      this.state.notes.filter((_note) => _note.id === newID)[0]
     );
     this.setState({
       selectedNote: this.state.notes[newNoteIndex],
-      selectedNoteIndex: newNoteIndex
+      selectedNoteIndex: newNoteIndex,
     });
   };
-  deleteNote = async note => {
+  deleteNote = async (note) => {
     const noteIndex = this.state.notes.indexOf(note);
     await this.setState({
-      notes: this.state.notes.filter(_note => _note !== note)
+      notes: this.state.notes.filter((_note) => _note !== note),
     });
     if (this.state.selectedNoteIndex === noteIndex) {
       this.setState({ selectedNoteIndex: null, selectedNote: null });
@@ -110,11 +102,7 @@ when we create a new note go to file base and add and then update
         : this.setState({ selectedNoteIndex: null, selectedNote: null });
     }
     // deletes notes from firebase
-    firebase
-      .firestore()
-      .collection("notes")
-      .doc(note.id)
-      .delete();
+    firebase.firestore().collection("notes").doc(note.id).delete();
   };
 }
 

@@ -35,7 +35,7 @@ firebase.initializeApp({
 ReactDOM.render(
   <Router>
     <div id="routing-container">
-      <Route path="/login" component={LoginComponent}></Route>
+      <Route exact path="/" component={LoginComponent}></Route>
       <Route path="/signup" component={SignupComponent}></Route>
       <Route path="/app" component={App}></Route>
     </div>

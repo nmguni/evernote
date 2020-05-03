@@ -18,7 +18,7 @@ class SignupComponent extends React.Component {
       email: null,
       password: null,
       passwordConfermation: null,
-      signupError: ""
+      signupError: "",
     };
   }
 
@@ -35,7 +35,10 @@ class SignupComponent extends React.Component {
             <Typography component="h1" variant="h5">
               Sign Up!
             </Typography>
-            <form className={classes.form} onSubmit={e => this.submitSignup(e)}>
+            <form
+              className={classes.form}
+              onSubmit={(e) => this.submitSignup(e)}
+            >
               {" "}
               <FormControl required fullWidth margin="normal">
                 <InputLabel htmlFor="signup-email-input">
@@ -45,7 +48,7 @@ class SignupComponent extends React.Component {
                   autoComplete="email"
                   autoFocus
                   id="signup-email-input"
-                  onChange={e => this.userTyping("email", e)}
+                  onChange={(e) => this.userTyping("email", e)}
                 ></Input>
               </FormControl>
               <FormControl required fullWidth margin="normal">
@@ -55,7 +58,7 @@ class SignupComponent extends React.Component {
                 <Input
                   type="password"
                   id="signup-email-input"
-                  onChange={e => this.userTyping("password", e)}
+                  onChange={(e) => this.userTyping("password", e)}
                 ></Input>
               </FormControl>
               <FormControl required fullWidth margin="normal">
@@ -65,7 +68,7 @@ class SignupComponent extends React.Component {
                 <Input
                   type="password"
                   id="signup-password-confermation-input"
-                  onChange={e => this.userTyping("passwordConfermation", e)}
+                  onChange={(e) => this.userTyping("passwordConfermation", e)}
                 ></Input>
               </FormControl>
               <Button
@@ -92,9 +95,9 @@ class SignupComponent extends React.Component {
               variant="h6"
               className={classes.hasAccountHeader}
             >
-              Already Has Account
+              Already Have An Account
             </Typography>
-            <Link className={classes.logInLink} to="/login">
+            <Link className={classes.logInLink} to="/">
               Login
             </Link>
           </Paper>
@@ -121,7 +124,7 @@ class SignupComponent extends React.Component {
         break;
     }
   };
-  submitSignup = e => {
+  submitSignup = (e) => {
     e.preventDefault();
     if (!this.formIsValid()) {
       this.setState({ signupError: "Passwords do not match" });
@@ -132,11 +135,11 @@ class SignupComponent extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(
-        authRes => {
+        (authRes) => {
           const userObj = {
             email: authRes.user.email,
             friends: [],
-            messages: []
+            messages: [],
           };
           firebase
             .firestore()
@@ -145,16 +148,16 @@ class SignupComponent extends React.Component {
             .set(userObj)
             .then(
               () => {
-                this.props.history.push("/dashboard");
+                this.props.history.push("/app");
               },
-              dbErr => {
+              (dbErr) => {
                 // database error
                 console.log("Failed to add user to the database: ", dbErr);
                 this.setState({ signupError: "Failed to add user" });
               }
             );
         },
-        authErr => {
+        (authErr) => {
           console.log("Failed to create user: ", authErr);
           this.setState({ signupError: "Failed to add user" });
         }
