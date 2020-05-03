@@ -73,9 +73,7 @@ class LoginComponent extends React.Component {
                 variant="contained"
                 className={classes.submit}
               >
-                <Link className={classes.signUpLinkLogIn} to="/app">
-                  Log In
-                </Link>
+                Log In
               </Button>
             </form>
             {this.state.serverError ? (
