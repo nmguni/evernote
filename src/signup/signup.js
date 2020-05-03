@@ -75,7 +75,6 @@ class SignupComponent extends React.Component {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
                 className={classes.submit}
               >
                 Submit
