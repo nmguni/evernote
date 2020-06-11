@@ -12,14 +12,14 @@ const firebase = require("firebase");
 require("firebase/firestore");
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDxUnQL5-daHACdlIEv4hsJ5XWsNk2f0wo",
-  authDomain: "evernote-clone-f30ff.firebaseapp.com",
-  databaseURL: "https://evernote-clone-f30ff.firebaseio.com",
-  projectId: "evernote-clone-f30ff",
-  storageBucket: "evernote-clone-f30ff.appspot.com",
-  messagingSenderId: "567186858504",
-  appId: "1:567186858504:web:4934900e9ff5a04cefa7bd",
-  measurementId: "G-0WNEPZ8NQF",
+  apiKey: "AIzaSyDnFEC5BktqJwJK5u2ZUc2TB7uJpYWUStM",
+  authDomain: "evernote-react-clone-46bb2.firebaseapp.com",
+  databaseURL: "https://evernote-react-clone-46bb2.firebaseio.com",
+  projectId: "evernote-react-clone-46bb2",
+  storageBucket: "evernote-react-clone-46bb2.appspot.com",
+  messagingSenderId: "1057579921198",
+  appId: "1:1057579921198:web:8c0f460fa05c5594ef94bf",
+  measurementId: "G-DMX02JEHQV",
 });
 
 // const routing = (

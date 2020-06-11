@@ -52,7 +52,7 @@ class EditorComponent extends React.Component {
             {" "}
             <Button>
               {" "}
-              <Link className={classes.exitBtn} to="/login">
+              <Link className={classes.exitBtn} to="/">
                 {" "}
                 Exit
               </Link>{" "}
